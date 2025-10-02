@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Listings</title>
+</head>
+
+<body>
+    <nav id="navBar" class="navbar-white">
+        <img src="images/logo-red.png" alt="logo" class="logo">
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="listings.html" class="active">Hotel Listings</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <a href="" class="register-btn">Register Now</a>
+        <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
+    </nav>
+    <div class="container">
+        <div class="list-container">
+            <div class="right-col">
+                <button class="filter-toggle">Show Filters</button>
+                <div class="sidebar">
+                    <h2>Select Filters</h2>
+
+                    <!-- Ratings -->
+                    <h3>Ratings</h3>
+                    <div class="filter">
+                        <input type="checkbox" data-type="rating" value="5" id="5-stars">
+                        <label for="5-stars">5</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="rating" value="4-5" id="4-5-stars">
+                        <label for="4-5-stars">4-5</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="rating" value="3-4" id="3-4-stars">
+                        <label for="3-4-stars">3-4</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="rating" value="2-3" id="2-3-stars">
+                        <label for="2-3-stars">2-3</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="rating" value="1-2" id="1-2-stars">
+                        <label for="1-2-stars">1-2</label><span>(0)</span>
+                    </div>
+
+                    <!-- Location -->
+                    <h3>Location</h3>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="Switzerland" id="switzerland">
+                        <label for="switzerland">Switzerland</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="Shanghai" id="shanghai">
+                        <label for="shanghai">Shanghai</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="Paris" id="paris">
+                        <label for="paris">Paris</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="Chicago" id="chicago">
+                        <label for="chicago">Chicago</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="France" id="france">
+                        <label for="france">France</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="London" id="london">
+                        <label for="london">London</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="Dubai" id="dubai">
+                        <label for="dubai">Dubai</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="San Francisco" id="san-francisco">
+                        <label for="san-francisco">San Francisco</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="Amsterdam" id="amsterdam">
+                        <label for="amsterdam">Amsterdam</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="USA" id="usa">
+                        <label for="usa">USA</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="Australia" id="australia">
+                        <label for="australia">Australia</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="India" id="india">
+                        <label for="india">India</label><span>(0)</span>
+                    </div>
+                    <div class="filter">
+                        <input type="checkbox" data-type="location" value="Netherlands" id="netherlands">
+                        <label for="netherlands">Netherlands</label><span>(0)</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="left-col">
+                <h1>Hotels Listings</h1>
+                <div id="listings" class="house"></div>
+                <div id="pagination" class="pagination"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+            <a href=""><i class="fa-brands fa-youtube"></i></a>
+            <a href=""><i class="fa-brands fa-twitter"></i></a>
+            <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href=""><i class="fa-brands fa-instagram"></i></a>
+            <hr>
+            <p>Copyright ©, Aditya</p>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script>
+        const filterToggle = document.querySelector(".filter-toggle");
+        const sidebar = document.querySelector(".sidebar");
+
+        // Toggle sidebar on mobile
+        filterToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("active");
+            filterToggle.textContent = sidebar.classList.contains("active") ? "Hide Filters" : "Show Filters";
+        });
+
+        // Load CSV and setup listings
+        Papa.parse("listings.csv", {
+            download: true,
+            header: true,
+            complete: function (results) {
+                const allData = results.data.filter(item => item.title); // keep valid rows only
+                let filteredData = [...allData];
+                const container = document.getElementById("listings");
+                const pagination = document.getElementById("pagination");
+                const itemsPerPage = 7;
+                let currentPage = 1;
+
+                // 🟢 Display listings
+                function displayListings(page, data) {
+                    container.innerHTML = "";
+                    let start = (page - 1) * itemsPerPage;
+                    let end = start + itemsPerPage;
+                    let paginatedItems = data.slice(start, end);
+
+                    if (paginatedItems.length === 0) {
+                        container.innerHTML = "<p>No listings found.</p>";
+                        return;
+                    }
+
+                    paginatedItems.forEach(item => {
+                        const card = document.createElement("div");
+                        card.className = "house";
+
+                        // generate stars
+                        const rating = parseFloat(item.ratings) || 0;
+                        let starsHtml = "";
+                        for (let i = 1; i <= 5; i++) {
+                            if (rating >= i) starsHtml += '<i class="fa-solid fa-star"></i>';
+                            else if (rating >= i - 0.5) starsHtml += '<i class="fa-solid fa-star-half-stroke"></i>';
+                            else starsHtml += '<i class="fa-regular fa-star"></i>';
+                        }
+                        card.className = "house";
+                        card.innerHTML = `
+    <a href="hotel.html?title=${encodeURIComponent(item.title)}">
+        <div class="house-img">
+            <img src="${item.image}" alt="">
+        </div>
+        <div class="house-info">
+            <p>${item.location || "Unknown Location"}</p>
+            <h3>${item.title || "Untitled Property"}</h3>
+            <div class="house-rating">
+                ${starsHtml} <span>${rating.toFixed(1)}</span>
+            </div>
+            <p>${item.details || "1 Bedroom / 1 Bathroom / Wifi / Kitchen"}</p>
+            <div class="house-price">
+                <p>${item.guests || "2 Guests"} Guests</p>
+                <h4>₹${item.price || "N/A"} <span>/ Day</span></h4>
+            </div>
+        </div>
+    </a>
+`;
+                        container.appendChild(card);
+                    });
+                }
+
+                // 🟢 Pagination
+                function setupPagination(data) {
+                    pagination.innerHTML = "";
+                    let pageCount = Math.ceil(data.length / itemsPerPage);
+
+                    for (let i = 1; i <= pageCount; i++) {
+                        let btn = document.createElement("button");
+                        btn.innerText = i;
+                        btn.classList.add("page-btn");
+                        if (i === currentPage) btn.classList.add("active");
+
+                        btn.addEventListener("click", () => {
+                            currentPage = i;
+                            displayListings(currentPage, data);
+                            setupPagination(data);
+                        });
+
+                        pagination.appendChild(btn);
+                    }
+                }
+
+                // 🟢 Update counts for filters
+                function updateFilterCounts(data) {
+                    document.querySelectorAll('.filter input').forEach(cb => {
+                        const type = cb.dataset.type;
+                        const value = cb.value;
+
+                        let count = data.filter(item => {
+                            if (type === "rating") {
+                                let rating = parseFloat(item.ratings);
+                                if (value.includes("-")) {
+                                    let [min, max] = value.split("-").map(Number);
+                                    return rating >= min && rating <= max;
+                                } else return rating === parseFloat(value);
+                            }
+                            if (type === "location") return item.location === value;
+                            return false;
+                        }).length;
+
+                        cb.nextElementSibling.nextElementSibling.textContent = `(${count})`;
+                    });
+                }
+
+                // 🟢 Apply filters
+                function applyFilters() {
+                    const selectedRatings = Array.from(document.querySelectorAll('.filter input[data-type="rating"]:checked')).map(cb => cb.value);
+                    const selectedLocations = Array.from(document.querySelectorAll('.filter input[data-type="location"]:checked')).map(cb => cb.value);
+
+                    filteredData = allData.filter(item => {
+                        let rating = parseFloat(item.ratings);
+                        let ratingMatch = selectedRatings.length === 0 || selectedRatings.some(r => {
+                            if (r.includes("-")) {
+                                let [min, max] = r.split("-").map(Number);
+                                return rating >= min && rating <= max;
+                            } else return rating === parseFloat(r);
+                        });
+                        let locationMatch = selectedLocations.length === 0 || selectedLocations.includes(item.location);
+                        return ratingMatch && locationMatch;
+                    });
+
+                    currentPage = 1; // reset page
+                    displayListings(currentPage, filteredData);
+                    setupPagination(filteredData);
+                    updateFilterCounts(allData); // counts always show totals
+                }
+
+                // 🟢 Attach filter events
+                document.querySelectorAll('.filter input').forEach(cb => cb.addEventListener("change", applyFilters));
+
+                // 🟢 Pre-select location from homepage if passed via URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const preselectedLocation = urlParams.get("location");
+                if (preselectedLocation) {
+                    const locationCheckbox = document.querySelector(`.filter input[data-type="location"][value="${preselectedLocation}"]`);
+                    if (locationCheckbox) locationCheckbox.checked = true;
+                }
+
+                // 🟢 Initial load
+                applyFilters(); // handles preselection & displays listings
+            }
+        });
+
+    </script>
+
+
+
+
+
+    <script>
+        const navBar = document.getElementById("navBar")
+
+        function togglebtn() {
+            navBar.classList.toggle("hidemenu")
+        }
+    </script>
+</body>
+
+</html>

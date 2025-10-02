@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Details</title>
+    <link rel="stylesheet" href="hotels.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <img src="images/logo-red.png" alt="logo" class="logo">
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="listings.html">Listings</a></li>
+        </ul>
+    </nav>
+    <button id="back-btn" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i> Back to Listings
+    </button>
+    <div class="hotel-hero">
+        <div class="hero-img" id="hero-img">
+            <!-- Hero image injected here -->
+        </div>
+        <div class="hero-info">
+            <h1 id="hotel-title"></h1>
+            <p id="hotel-location"><i class="fa-solid fa-location-dot"></i></p>
+
+            <div class="ratings">
+                <span class="stars" id="hotel-stars"></span>
+            </div>
+
+            <!-- Reviews text with Read More -->
+            <div class="reviews-section">
+                <h2>Reviews</h2>
+                <div class="reviews-text-container">
+                    <p id="hotel-reviews" class="text-preview"></p>
+                    <button id="reviews-read-more-btn" class="read-more-btn">Read More</button>
+                </div>
+            </div>
+
+            <h2 class="price" id="hotel-price"></h2>
+            <div class="hotel-meta">
+                <p id="hotel-guests"></p>
+                <p id="hotel-pet"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="hotel-content">
+        <div class="hotel-details">
+            <p id="hotel-description" class="text-preview"></p>
+            <button id="read-more-btn" class="read-more-btn">Read More</button>
+
+            <h2>Details</h2>
+            <p id="hotel-details"></p>
+
+            <h2>Rules</h2>
+            <p id="hotel-rules"></p>
+
+            <h2>Highlights</h2>
+            <p id="hotel-highlights"></p>
+        </div>
+
+        <div class="hotel-map">
+            <h2>Location Map</h2>
+            <div class="map-container" id="map-container">
+                <!-- Map iframe injected here -->
+            </div>
+        </div>
+    </div>
+    <script>
+        Papa.parse("listings.csv", {
+            download: true,
+            header: true,
+            complete: function (results) {
+                const hotels = results.data.filter(h => h.title); // filter out empty rows
+                const urlParams = new URLSearchParams(window.location.search);
+                const hotelTitle = urlParams.get('title');
+                const hotel = hotels.find(h => h.title === hotelTitle) || hotels[0];
+
+                // Hero Image
+                const heroImg = document.getElementById("hero-img");
+                heroImg.innerHTML = `<img src="${hotel.image}" alt="${hotel.title}">`;
+
+                // Title & Location
+                document.getElementById("hotel-title").textContent = hotel.title;
+                document.getElementById("hotel-location").innerHTML = `<i class="fa-solid fa-location-dot"></i> ${hotel.location || "Unknown Location"}`;
+
+                // Ratings
+                const rating = parseFloat(hotel.ratings) || 0;
+                let starsHtml = "";
+                for (let i = 1; i <= 5; i++) {
+                    if (rating >= i) starsHtml += '<i class="fa-solid fa-star"></i>';
+                    else if (rating >= i - 0.5) starsHtml += '<i class="fa-solid fa-star-half-stroke"></i>';
+                    else starsHtml += '<i class="fa-regular fa-star"></i>';
+                }
+                document.getElementById("hotel-stars").innerHTML = starsHtml;
+
+                // Reviews
+                const reviewsEl = document.getElementById("hotel-reviews"); // match HTML ID
+                reviewsEl.textContent = hotel.reviews || "No reviews available";
+
+                const reviewsBtn = document.getElementById("reviews-read-more-btn");
+                reviewsBtn.addEventListener("click", () => {
+                    reviewsEl.classList.toggle("expanded");
+                    reviewsBtn.textContent = reviewsEl.classList.contains("expanded") ? "Read Less" : "Read More";
+                });
+
+                // Price
+                document.getElementById("hotel-price").innerHTML = `₹${hotel.price || "N/A"} <span>/ Day</span>`;
+
+                // Guests & Pets
+                document.getElementById("hotel-guests").textContent = `Guests: ${hotel.guests || "N/A"}`;
+                document.getElementById("hotel-pet").textContent = `Pets Allowed: ${hotel.pet === "true" ? "Yes" : "No"}`;
+
+                // Description, Details, Rules, Highlights
+                const descEl = document.getElementById("hotel-description");
+                descEl.textContent = hotel.description || "No description available";
+
+                const descBtn = document.getElementById("read-more-btn");
+                descBtn.addEventListener("click", () => {
+                    descEl.classList.toggle("expanded");
+                    descBtn.textContent = descEl.classList.contains("expanded") ? "Read Less" : "Read More";
+                });
+
+                document.getElementById("hotel-details").textContent = hotel.details || "N/A";
+                document.getElementById("hotel-rules").textContent = hotel.rule || "N/A";
+                document.getElementById("hotel-highlights").textContent = hotel.highlights || "N/A";
+
+                // Map
+                const mapContainer = document.getElementById("map-container");
+                if (hotel.lat && hotel.long) {
+                    mapContainer.innerHTML = `<iframe src="https://www.google.com/maps?q=${hotel.lat},${hotel.long}&hl=es;z=14&output=embed"
+            width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`;
+                } else {
+                    mapContainer.textContent = "Map not available";
+                }
+            }
+        });
+        // Back Button functionality
+        const backBtn = document.getElementById("back-btn");
+        backBtn.addEventListener("click", () => {
+            window.location.href = "listings.html"; // change if your listings page has a different URL
+        });
+
+    </script>
+
+
+</body>
+
+</html>

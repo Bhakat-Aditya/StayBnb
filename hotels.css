@@ -1,0 +1,238 @@
+/* -------------------- Fonts & Body -------------------- */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #5b622a;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* -------------------- Navbar -------------------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    backdrop-filter: blur(10px);
+    background: rgba(15, 15, 20, 0.6);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    width: 140px;
+    filter: drop-shadow(0 0 5px #ff3b4f);
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.navbar .nav-links a {
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+    background: #ff3b4f;
+    color: #fff;
+    box-shadow: 0 0 12px #ff3b4f;
+}
+
+/* -------------------- Back Button -------------------- */
+.back-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(90deg, #00f0ff, #ff3b4f);
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5), 0 0 20px rgba(255, 59, 79, 0.5);
+    backdrop-filter: blur(6px);
+    transition: all 0.3s ease;
+    z-index: 10000;
+}
+
+.back-btn:hover {
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.8), 0 0 30px rgba(255, 59, 79, 0.8);
+    transform: translateY(-2px);
+}
+
+
+/* -------------------- Hero -------------------- */
+.hotel-hero {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 40px 5%;
+    background: rgba(20, 20, 30, 0.7);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(255, 59, 79, 0.3);
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s ease;
+}
+
+.hero-img {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    overflow: hidden;
+}
+
+.hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px 0 0 20px;
+    transition: transform 0.5s ease;
+}
+
+.hero-img img:hover {
+    transform: scale(1.05);
+}
+
+.hero-info {
+    flex: 1;
+    padding: 30px 25px;
+}
+
+/* -------------------- Headings -------------------- */
+.hero-info h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: #ff3b4f;
+    margin-bottom: 12px;
+    text-shadow: 0 0 10px #ff3b4f;
+}
+
+.hero-info p {
+    color: #aaa;
+    font-size: 1rem;
+}
+
+/* -------------------- Stars -------------------- */
+.stars i {
+    color: #f4c150;
+    font-size: 1.2rem;
+    margin-right: 4px;
+}
+
+/* -------------------- Reviews -------------------- */
+.reviews-section {
+    margin: 20px 0;
+}
+
+.reviews-text-container {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 18px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px rgba(255, 59, 79, 0.2);
+}
+
+.text-preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 10px;
+    color: #ddd;
+}
+
+.text-preview.expanded {
+    -webkit-line-clamp: unset;
+}
+
+/* -------------------- Buttons -------------------- */
+.read-more-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff3b4f, #ff7b81);
+    color: #fff;
+    border: none;
+    padding: 10px 26px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 0 12px rgba(255, 59, 79, 0.5);
+    transition: all 0.3s ease;
+}
+
+.read-more-btn:hover {
+    box-shadow: 0 0 20px rgba(255, 59, 79, 0.8);
+    transform: translateY(-2px);
+}
+
+/* -------------------- Price & Meta -------------------- */
+.price {
+    font-size: 2rem;
+    color: #ff3b4f;
+    margin: 15px 0;
+}
+
+.hotel-meta p {
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+/* -------------------- Content -------------------- */
+.hotel-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 40px 5%;
+}
+
+.hotel-details,
+.hotel-map {
+    background: rgba(20, 20, 30, 0.7);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 0 25px rgba(255, 59, 79, 0.2);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+.hotel-details:hover,
+.hotel-map:hover {
+    transform: translateY(-3px);
+}
+
+.hotel-map iframe {
+    border-radius: 20px;
+}
+
+/* -------------------- Responsive -------------------- */
+@media screen and (max-width: 1024px) {
+
+    .hotel-hero,
+    .hotel-content {
+        flex-direction: column;
+    }
+
+    .hero-img img {
+        border-radius: 20px 20px 0 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .hero-info h1 {
+        font-size: 2rem;
+    }
+
+    .price {
+        font-size: 1.5rem;
+    }
+}
