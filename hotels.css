@@ -1,7 +1,7 @@
 /* -------------------- Fonts & Body -------------------- */
 body {
     font-family: 'Roboto', sans-serif;
-    background: #5b622a;
+    background: #1b4266;
     color: #fff;
     margin: 0;
     padding: 0;
@@ -112,7 +112,7 @@ body {
 .hero-info h1 {
     font-family: 'Orbitron', sans-serif;
     font-size: 2.5rem;
-    color: #ff3b4f;
+    color: #bfb03e;
     margin-bottom: 12px;
     text-shadow: 0 0 10px #ff3b4f;
 }
@@ -158,7 +158,7 @@ body {
 /* -------------------- Buttons -------------------- */
 .read-more-btn {
     display: inline-block;
-    background: linear-gradient(90deg, #ff3b4f, #ff7b81);
+    background: #bfb03e;
     color: #fff;
     border: none;
     padding: 10px 26px;
@@ -178,7 +178,7 @@ body {
 /* -------------------- Price & Meta -------------------- */
 .price {
     font-size: 2rem;
-    color: #ff3b4f;
+    color: #bfb03e;
     margin: 15px 0;
 }
 
