@@ -241,6 +241,10 @@
 
             // Redirect to listings page
             window.location.href = url;
+            guestInput.value = ''; // Clear guest input after submission
+            checkinInput.value = ''; // Clear check-in input after submission
+            checkoutInput.value = ''; // Clear check-out input after submission
+            locationSelect.value = ''; // Clear location select after submission
         });
     </script>
 
