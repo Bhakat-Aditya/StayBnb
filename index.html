@@ -25,13 +25,31 @@
             <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
         </nav>
         <div class="container">
-            <h1>Find Your Nest Stay</h1>
+            <h1>Find Your Next Stay</h1>
             <div class="search-bar">
-                <form>
+                <form id="searchForm">
                     <div class="location-input search-input">
-                        <label>Location</label>
-                        <input type="text" placeholder="Where are you going?">
+                        <label for="location-select">Location</label>
+                        <select id="location-select" name="location">
+                            <option value="" disabled selected>Select a location</option>
+                            <option value="Paris">Paris</option>
+                            <option value="Dubai">Dubai</option>
+                            <option value="India">India</option>
+                            <option value="USA">USA</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Shanghai">Shanghai</option>
+                            <option value="San Francisco">San Francisco</option>
+                            <option value="Chicago">Chicago</option>
+                            <option value="Netherlands">Netherlands</option>
+                            <option value="Amsterdam">Amsterdam</option>
+                            <option value="France">France</option>
+                            <option value="London">London</option>
+                            <option value="Switzerland">Switzerland</option>
+                        </select>
                     </div>
+
+
+
                     <div class="checkin-input search-input">
                         <label for="checkin">Check-In</label>
                         <input type="date" placeholder="Add Date" id="checkin">
@@ -201,6 +219,31 @@
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.getElementById("searchForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // prevent page reload
+
+            const location = document.getElementById("location-select").value;
+            const checkin = document.getElementById("checkin").value;
+            const checkout = document.getElementById("checkout").value;
+            const guest = document.getElementById("guest").value;
+
+            if (!location) {
+                alert("Please select a location first!");
+                return;
+            }
+
+            // Build URL with selected values (only location is required)
+            let url = `listings.html?location=${encodeURIComponent(location)}`;
+            if (checkin) url += `&checkin=${encodeURIComponent(checkin)}`;
+            if (checkout) url += `&checkout=${encodeURIComponent(checkout)}`;
+            if (guest) url += `&guest=${encodeURIComponent(guest)}`;
+
+            // Redirect to listings page
+            window.location.href = url;
+        });
+    </script>
+
     <script>
         const navBar = document.getElementById("navBar")
 
